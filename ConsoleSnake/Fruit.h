@@ -1,13 +1,14 @@
 #ifndef FRUIT_H
 #define FRUIT_H
 
-class Fruit {
+class Fruit 
+{
 public:
 	Fruit();
 	void generateCoordinates(int rows, int cols);
 	void putOnGrid(char** grid);
-	int fruitX{}, fruitY{}, score{}, direction{};
-	bool isAlive{};
+	void removeFromGrid(int X, int Y, char** grid);
+	int fruitX{}, fruitY{}, isAlive{};
 
 
 private:

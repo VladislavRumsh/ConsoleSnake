@@ -2,7 +2,6 @@
 #include "Random.h"
 Fruit::Fruit()
 {
-
 	isAlive = true;
 }
 
@@ -15,6 +14,13 @@ void Fruit::generateCoordinates(int rows, int cols)
 }
 
 // Puts the entity of the fruit class on the array in it's coordinates
-void Fruit::putOnGrid(char** grid) {
+void Fruit::putOnGrid(char** grid) 
+{
 	grid[fruitY][fruitX] = 'F';
+}
+
+void Fruit::removeFromGrid(int X, int Y, char** grid) 
+{
+	grid[fruitX][fruitX] = ' ';
+	return;
 }

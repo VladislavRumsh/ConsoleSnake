@@ -1,7 +1,8 @@
 #ifndef SNAKE_H
 #define SNAKE_H
 
-class Snake{
+class Snake
+{
 public:
 	Snake();
 	void generateCoordinates(int rows, int cols);

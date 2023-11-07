@@ -14,13 +14,15 @@ void Snake::generateCoordinates(int rows, int cols)
 }
 
 // Puts the entity of the fruit class on the array in it's coordinates
-void Snake::putOnGrid(char** grid) {
+void Snake::putOnGrid(char** grid) 
+{
 	grid[snakeY][snakeX] = 'S';
 	return;
 }
 
 // Makes the Snake entity move 1 step with each iteration of the game loop
-void Snake::stepForward(char **grid) {
+void Snake::stepForward(char **grid) 
+{
 
 	removeFromGrid(snakeX, snakeY, grid); // Clear old coordinates on the grid
 
@@ -48,7 +50,8 @@ void Snake::stepForward(char **grid) {
 }
 
 // Cleans the location on the grid that is no more used by the Snake
-void Snake::removeFromGrid(int X, int Y, char** grid) {
+void Snake::removeFromGrid(int X, int Y, char** grid) 
+{
 	grid[snakeY][snakeX] = ' ';
 	return;
 }

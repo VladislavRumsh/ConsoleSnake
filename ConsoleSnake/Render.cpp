@@ -33,10 +33,10 @@ void buildGrid(int rows, int cols, char** grid)
 
 
 // clear the console for the new frame and print the grid in the console
-void render(int rows, int cols, char** grid) 
+void render(int rows, int cols, char** grid, int score)
 {
 	system(CLEAR_COMMAND);
-
+	// Game state
 	for (int i = 0; i < rows; ++i)
 	{
 		for (int j = 0; j < cols; ++j)
@@ -45,6 +45,9 @@ void render(int rows, int cols, char** grid)
 		}
 		std::cout << std::endl;
 	}
+	// Score
+	std::cout << score << std::endl;
+
 	return;
 }
 
