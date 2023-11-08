@@ -1,19 +1,19 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "GameEntities.h"
+#include "Render.h"
 
 class Game 
 {
 public:
 	Game();
-	void run();
-
-private:
+	void run(Game& gameInstance);
 	int rows{}, cols{}, gameSpeed{};
 	bool runGame{};
+
+private:
+
 };
-
-
-void sleep_ms(int gameSpeed);
 
 #endif

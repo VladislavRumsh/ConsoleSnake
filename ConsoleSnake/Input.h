@@ -1,12 +1,12 @@
 #ifndef INPUT_H
 #define INPUT_H
-
+#include "Entity.h"
 
 class Input 
 {
 public:
 	Input();
-	void run(int* directions);
+	void run(Entity& playerInstance);
 private:
 	int* direction{};
 };

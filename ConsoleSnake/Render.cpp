@@ -1,24 +1,15 @@
-#include <iostream>
-#include <cstdlib>
-
-// Adjust the clearing console command for either Linux or Windows
-#ifdef _WIN32
-#include <windows.h>
-#define CLEAR_COMMAND "cls"
-#else
-#define CLEAR_COMMAND "clear"
-#endif
+#include "Render.h"
 
 
 // Update the intial state of the grid
-void buildGrid(int rows, int cols, char** grid)
+void buildGrid(Game& gameInstance, char** grid)
 {
-	for (int i = 0; i < rows; i++)
+	for (int i = 0; i < gameInstance.rows; i++)
 	{
-		for (int j = 0; j < cols; j++)
+		for (int j = 0; j < gameInstance.cols; j++)
 		{
 			// Generate Walls
-			if (i == 0 || i == rows - 1 || j == 0 || j == cols - 1)
+			if (i == 0 || i == gameInstance.rows - 1 || j == 0 || j == gameInstance.cols - 1)
 			{
 				grid[i][j] = '#';
 			}
@@ -33,13 +24,13 @@ void buildGrid(int rows, int cols, char** grid)
 
 
 // clear the console for the new frame and print the grid in the console
-void render(int rows, int cols, char** grid, int score)
+void render(Game& gameInstance, char** grid, int score)
 {
-	system(CLEAR_COMMAND);
+	system("cls");
 	// Game state
-	for (int i = 0; i < rows; ++i)
+	for (int i = 0; i < gameInstance.rows; ++i)
 	{
-		for (int j = 0; j < cols; ++j)
+		for (int j = 0; j < gameInstance.cols; ++j)
 		{
 			std::cout << grid[i][j];
 		}

@@ -23,7 +23,7 @@ void Entity::putOnGrid(char** grid)
 		switch (direction)
 		{
 		case 0:
-			grid[entityY][entityX] = 'S';
+			grid[entityY][entityX] = 'S';;
 			return;
 		case 1:
 			grid[entityY][entityX] = '^';
@@ -37,7 +37,6 @@ void Entity::putOnGrid(char** grid)
 		case 4:
 			grid[entityY][entityX] = '>';
 			return;
-
 		}
 
 	}

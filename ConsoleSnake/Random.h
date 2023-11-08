@@ -1,8 +1,16 @@
 #ifndef RANDOM_H
 #define RANDOM_H
 
+#include "GameEntities.h"
+#include <random>
+#include <chrono>
 
-int randomNum();
-void randomCoords(int* X,int* Y, int rows, int cols);
+class Snake;  // Forward declaration
+class Entity;  // Forward declaration
+class Fruit;  // Forward declaration
+class Game;   // Forward declaration
+
+int randomNum(int num);
+void randomCoords(Entity& playerInstance, Game& gameInstance);
 
 #endif
