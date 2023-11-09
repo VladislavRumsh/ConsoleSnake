@@ -5,6 +5,7 @@
 Entity::Entity()
 {
 	isAlive = true;
+	growBodyCheck= false;
 	entityId = 0; // 1 - Snake's head, 2 - Fruit
 	direction = 0; // Snake's direction: 1 - UP 2 - DOWN 3 - LEFT 4 - RIGHT
 }
@@ -53,6 +54,7 @@ void Entity::putOnGrid(char** grid)
 void Entity::stepForward(Entity& playerInstance, char** grid)
 {
 
+
 	removeFromGrid(playerInstance, grid);
 
 	// Check the direction in which the snake is set to go
@@ -76,6 +78,7 @@ void Entity::stepForward(Entity& playerInstance, char** grid)
 		return;
 	}
 
+
 	return;
 }
 
@@ -89,32 +92,44 @@ void Entity::removeFromGrid(Entity& playerInstance, char** grid)
 // This function generates new an object for each snake's body segments 
 void Entity::growBody()
 {
-	// Put Last's Snake's segment either head's or body's coordinates into the newly generated one
-	int newSegmentX = entityX;
-	int newSegmentY = entityY;
+	// Initialize temporary variables to operate with Data set the function operate either with Snake's head for the first segment or the last segment of it's body
+	int newSegmentX{}, newSegmentY{}, directionForNewSegment{};
 
-	// Adjust to the correct swapn location
-	switch (oldDirection) {
-	case 1: 
-		newSegmentY += 1;
-		break;
-	case 2: 
-		newSegmentY -= 1;
-		break;
-	case 3:
-		newSegmentX += 1;
-		break;
-	case 4:
-		newSegmentX -= 1;
-		break;
-	}
+		if (body.empty())
+		{
+			newSegmentX = entityX;
+			newSegmentY = entityY;
+			directionForNewSegment = oldDirection;
+		} 
+		else
+		{
+			newSegmentX = body.back().entityX;
+			newSegmentY = body.back().entityY;
+			directionForNewSegment = body.back().oldDirection;
+		}
 
-	Entity newBodySegment;
-	newBodySegment.entityX = newSegmentX;
-	newBodySegment.entityY = newSegmentY;
-	newBodySegment.entityId = 0;
-	newBodySegment.direction = oldDirection;
+		// Adjust to the correct swapn location
+		switch (directionForNewSegment) {
+		case 1:
+			newSegmentY += 1;
+			break;
+		case 2:
+			newSegmentY -= 1;
+			break;
+		case 3:
+			newSegmentX += 1;
+			break;
+		case 4:
+			newSegmentX -= 1;
+			break;
+		}
 
-	body.push_back(newBodySegment);
+		Entity newBodySegment;
+		newBodySegment.entityX = newSegmentX;
+		newBodySegment.entityY = newSegmentY;
+		newBodySegment.entityId = 0;
+		newBodySegment.direction = directionForNewSegment;
 
+		body.push_back(newBodySegment);
+	
 }
