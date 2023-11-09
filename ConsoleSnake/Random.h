@@ -11,6 +11,6 @@ class Fruit;  // Forward declaration
 class Game;   // Forward declaration
 
 int randomNum(int num);
-void randomCoords(Entity& playerInstance, Game& gameInstance);
+void randomCoords(Entity& playerInstance, Game& gameInstance, char** grid);
 
 #endif

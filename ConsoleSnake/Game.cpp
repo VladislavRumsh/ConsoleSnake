@@ -16,17 +16,23 @@ Game::Game()
 // Start of the game instance
 void Game::run(Game& gameInstance)
 {
+		// Allocate memory for the game grid which sercves the role as visual represintation of the game's state which is printed in the console
+	char** grid = new char* [rows];
+	for (int i = 0; i < rows; i++) {
+		grid[i] = new char[cols];
+	}
 
-	//Snake playerInstance; // Generating Snake instance
-	//playerInstance.generateCoordinates(playerInstance, gameInstance); // Generating coordinates for the Snake
+	// Build the initial Grid State
+	buildGrid(gameInstance, grid);
 
 	Entity playerInstance; // Generating Snake instance
 	playerInstance.entityId = 0; // set playerInstance to Player's Snake entity
-	playerInstance.generateCoordinates(playerInstance, gameInstance); // Generating coordinates for the Player
+	playerInstance.generateCoordinates(playerInstance, gameInstance, grid); // Generating coordinates for the Player
 
 	Entity fruitInstance; // Generating Fruit instance
 	fruitInstance.entityId = 1; // set fruitInstance to Fruit
-	fruitInstance.generateCoordinates(fruitInstance, gameInstance);
+
+	fruitInstance.generateCoordinates(fruitInstance, gameInstance, grid);
 
 	// Create instance of the Input object and run it on another thread to ensure responsive controls
 	Input inputInstance;
@@ -38,14 +44,7 @@ void Game::run(Game& gameInstance)
 	Collision collisionClass; // Generate Collision class for collision funtions
 
 
-	// Allocate memory for the game grid which sercves the role as visual represintation of the game's state which is printed in the console
-	char** grid = new char* [rows];
-	for (int i = 0; i < rows; i++) {
-		grid[i] = new char[cols];
-	}
 
-	// Build the initial Grid State
-	buildGrid(gameInstance, grid);
 
 	// Put the Snake to it's current coordinations on the grid
 	playerInstance.putOnGrid(grid);
@@ -55,24 +54,53 @@ void Game::run(Game& gameInstance)
 	do
 	{
 
+
+
 		// Check if snake has died, later to be moved in a seperate function
-		if (playerInstance.isAlive == false)
+		if (!playerInstance.isAlive)
 		{
 			break; // temporary using break to end the end in case of collision with a wall
 			// print game over
 			// press r to restart press m to return to main menu
 		}
 
+
+
+
+		
+
+
 		// Put the Snake to it's current coordinations on the grid
 		playerInstance.stepForward(playerInstance, grid);
 		playerInstance.oldDirection = playerInstance.direction;
 		playerInstance.putOnGrid(grid);
 
+
+		// Call stepForward the first body part and the others.
+		for (Entity& bodyStart : playerInstance.body) {
+			bodyStart.stepForward(bodyStart, grid);
+			bodyStart.oldDirection = bodyStart.direction;
+			bodyStart.putOnGrid(grid);
+			bodyStart.direction = playerInstance.oldDirection;
+
+			// Call stepForward on the rest of the body
+			for (Entity& bodyPart : bodyStart.body) {
+				bodyPart.stepForward(bodyPart, grid);
+				bodyPart.oldDirection = bodyPart.direction;
+				bodyPart.putOnGrid(grid);
+				bodyPart.direction = bodyStart.oldDirection;
+			}
+
+		}
+
+
+
+
 		// Check for collision with a Wall
 		collisionClass.collisionWithWall(playerInstance, fruitInstance, gameInstance);
 		
 		// Check for collision with a Fruit
-		collisionClass.collisionWithFruit(playerInstance, fruitInstance, gameInstance); // Creating a new body part inside this function
+		collisionClass.collisionWithFruit(playerInstance, fruitInstance, gameInstance, grid); // Creating a new body part inside this function
 
 
 		//void collisionWithFruit(int snakeX, int snakeY, int* score, int fruitX, int fruitY);
@@ -92,3 +120,14 @@ void Game::run(Game& gameInstance)
 }
 
 
+
+
+
+
+
+
+
+
+
+
+// ========================= remove old coordinates of the body part so it doesnt stay and change it's direction ================

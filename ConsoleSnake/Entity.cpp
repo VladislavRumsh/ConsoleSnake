@@ -1,6 +1,7 @@
 #include "Entity.h"
 
 
+
 Entity::Entity()
 {
 	isAlive = true;
@@ -9,9 +10,9 @@ Entity::Entity()
 }
 
 // Generating New Coordinates for the Snake entity
-void Entity::generateCoordinates(Entity& playerInstance, Game& gameInstance)
+void Entity::generateCoordinates(Entity& playerInstance, Game& gameInstance, char** grid)
 {
-	randomCoords(playerInstance, gameInstance);
+	randomCoords(playerInstance, gameInstance, grid);
 	return;
 }
 
@@ -52,10 +53,11 @@ void Entity::putOnGrid(char** grid)
 void Entity::stepForward(Entity& playerInstance, char** grid)
 {
 
-	removeFromGrid(playerInstance, grid); // Clear old coordinates on the grid
+	removeFromGrid(playerInstance, grid);
 
 	// Check the direction in which the snake is set to go
 	// 1 - UP 2 - DOWN 3 - LEFT 4 - RIGHT
+
 	switch (direction)
 	{
 	case 1:
@@ -82,4 +84,37 @@ void Entity::removeFromGrid(Entity& playerInstance, char** grid)
 {
 	grid[entityY][entityX] = ' ';
 	return;
+}
+
+// This function generates new an object for each snake's body segments 
+void Entity::growBody()
+{
+	// Put Last's Snake's segment either head's or body's coordinates into the newly generated one
+	int newSegmentX = entityX;
+	int newSegmentY = entityY;
+
+	// Adjust to the correct swapn location
+	switch (oldDirection) {
+	case 1: 
+		newSegmentY += 1;
+		break;
+	case 2: 
+		newSegmentY -= 1;
+		break;
+	case 3:
+		newSegmentX += 1;
+		break;
+	case 4:
+		newSegmentX -= 1;
+		break;
+	}
+
+	Entity newBodySegment;
+	newBodySegment.entityX = newSegmentX;
+	newBodySegment.entityY = newSegmentY;
+	newBodySegment.entityId = 0;
+	newBodySegment.direction = oldDirection;
+
+	body.push_back(newBodySegment);
+
 }
