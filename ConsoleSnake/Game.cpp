@@ -6,8 +6,8 @@
 // Initialize Game variables
 Game::Game() 
 {
-	rows = 17; // Set grid's heigth
-	cols = 17; // Set grid's width
+	rows = 6; // Set grid's heigth
+	cols = 8; // Set grid's width
 	runGame = true;
 	gameSpeed = 250; // Set to 500 for 2 frames per second
 
@@ -16,6 +16,9 @@ Game::Game()
 // Start of the game instance
 void Game::run(Game& gameInstance)
 {
+	// Calculate maximal possible score for current grid size
+	Game::maxScore = ((rows - 2) * (cols - 2));
+
 		// Allocate memory for the game grid which sercves the role as visual represintation of the game's state which is printed in the console
 	char** grid = new char* [rows];
 	for (int i = 0; i < rows; i++) {
@@ -28,6 +31,8 @@ void Game::run(Game& gameInstance)
 	Entity playerInstance; // Generating Snake instance
 	playerInstance.entityId = 0; // set playerInstance to Player's Snake entity
 	playerInstance.generateCoordinates(playerInstance, gameInstance, grid); // Generating coordinates for the Player
+
+	playerInstance.putOnGrid(grid); // spawning the snake on the grid so the check for whenever the grid is empty or not before spawning the fruit is met
 
 	Entity fruitInstance; // Generating Fruit instance
 	fruitInstance.entityId = 1; // set fruitInstance to Fruit
@@ -54,15 +59,33 @@ void Game::run(Game& gameInstance)
 	do
 	{
 
+		// later move this to check flags function or class
 
+		// Check if snake has won, later to be moved in a seperate function
+		if (playerInstance.hasWon)
+		{
+
+			system("cls");// print game over
+			std::cout << "YOU WON!!!\n";// press r to restart press m to return to main menu
+			std::cout << "YOUR SCORE IS: " << playerInstance.score << std::endl;
+			std::cin.get();
+			system("cls");
+			break;
+		}
 
 		// Check if snake has died, later to be moved in a seperate function
 		if (!playerInstance.isAlive)
 		{
-			break; // temporary using break to end the end in case of collision with a wall
-			// print game over
-			// press r to restart press m to return to main menu
+
+			system("cls");// print game over
+			std::cout << "GAME OVER!!!\n";// press r to restart press m to return to main menu
+			std::cout << "YOUR SCORE IS: " << playerInstance.score << std::endl;
+			std::cin.get();
+			system("cls");
+			break;
 		}
+
+
 
 
 		// Put the Snake to it's current coordinations on the grid
@@ -86,18 +109,19 @@ void Game::run(Game& gameInstance)
 			{
 				playerInstance.body[i].direction = playerInstance.body[i-1].oldDirection;
 			}
+			collisionClass.collisionWithBody(playerInstance, playerInstance.body[i], grid);
 			i++;
 		}
 
 		
 
+		// Check for collision with a Fruit
+		collisionClass.collisionWithFruit(playerInstance, fruitInstance, gameInstance, grid);
 
 
 		// Check for collision with a Wall
 		collisionClass.collisionWithWall(playerInstance, fruitInstance, gameInstance);
 		
-		// Check for collision with a Fruit
-		collisionClass.collisionWithFruit(playerInstance, fruitInstance, gameInstance, grid); 
 
 		
 		// Grow body when fruit collected, must run after the check with collision in the same iteration of the game loop.
@@ -116,6 +140,7 @@ void Game::run(Game& gameInstance)
 		fruitInstance.putOnGrid(grid);
 
 		render(gameInstance, grid, playerInstance.score); // Rendering the grid on the screen
+		std::cout << "\nMax Score: " << maxScore << std::endl;
 
 
 		Sleep(gameSpeed); // set Game Speed
@@ -123,6 +148,8 @@ void Game::run(Game& gameInstance)
 
 	// De-allocating the memory reseved for the grid
     deAllocateGrid(rows, grid);
+	// Detach input thread
+	inputThread.join();
 	return;
 }
 

@@ -12,7 +12,7 @@ Input::Input()
 void Input::run(Entity& playerInstance)
 {
 
-	while (true)
+	while (playerInstance.isAlive && !playerInstance.hasWon) // Check whenever the Snake is alive and if you haven't won yet, otherwise finish the function and have the thread detached
 	{
 		if ((GetAsyncKeyState(VK_UP) & 0x8000) && playerInstance.oldDirection != 2)
 		{

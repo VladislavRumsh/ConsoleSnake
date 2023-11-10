@@ -5,6 +5,7 @@
 Entity::Entity()
 {
 	isAlive = true;
+	hasWon = false;
 	growBodyCheck= false;
 	entityId = 0; // 1 - Snake's head, 2 - Fruit
 	direction = 0; // Snake's direction: 1 - UP 2 - DOWN 3 - LEFT 4 - RIGHT

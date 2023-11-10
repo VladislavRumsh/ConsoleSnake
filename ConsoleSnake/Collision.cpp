@@ -20,12 +20,25 @@ void Collision::collisionWithFruit(Entity& playerInstance, Entity& fruitInstance
 
 		fruitInstance.generateCoordinates(fruitInstance, gameInstance, grid);
 		++playerInstance.score;
+
+		// Check if winning condition, which is reaching maximum score is met.
+		if (playerInstance.score == gameInstance.maxScore)
+		{
+			playerInstance.hasWon = true; // For testng this "kills" the snake causing us to loose, later will be added winning flag
+		}
+
 	}
+
+
 	return;
 
 }
 
-void Collision::collisionWithBody()
+void Collision::collisionWithBody(Entity& playerInstance, Entity& bodyInstance, char** grid)
 {
+	if ((playerInstance.entityX == bodyInstance.entityX && playerInstance.entityY == bodyInstance.entityY))
+	{
+		playerInstance.isAlive = false;
+	}
 	return;
 }

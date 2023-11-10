@@ -19,7 +19,7 @@ public:
 	void removeFromGrid(Entity& playerInstance, char** grid);
 	void growBody();
 	int entityX{}, entityY{}, score{}, direction{}, oldDirection{};
-	bool isAlive{}, growBodyCheck{};
+	bool isAlive{}, growBodyCheck{}, hasWon{};
 	int entityId{}; // 1 - Snake's Head/Body, 2 - Fruit
 	std::vector<Entity> body;
 

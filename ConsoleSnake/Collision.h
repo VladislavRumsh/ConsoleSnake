@@ -8,7 +8,7 @@ class Collision
 public:
 	void collisionWithWall(Entity& playerInstance, Entity& fruitInstance, Game& gameInstance);
 	void collisionWithFruit(Entity& playerInstance, Entity& fruitInstance, Game& gameInstance, char** grid);
-	void collisionWithBody();
+	void collisionWithBody(Entity& playerInstance, Entity& bodyInstance, char** grid);
 private:
 
 };

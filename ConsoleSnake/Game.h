@@ -9,7 +9,7 @@ class Game
 public:
 	Game();
 	void run(Game& gameInstance);
-	int rows{}, cols{}, gameSpeed{};
+	int rows{}, cols{}, gameSpeed{}, maxScore{};
 	bool runGame{};
 
 private:
