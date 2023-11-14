@@ -4,12 +4,12 @@
 #include "Input.h"
 
 // Initialize Game variables
-Game::Game() 
+Game::Game(int setRows, int setCols, int setGameSpeed)
 {
-	rows = 6; // Set grid's heigth
-	cols = 8; // Set grid's width
+	rows = setRows; // Set grid's heigth
+	cols = setCols; // Set grid's width
 	runGame = true;
-	gameSpeed = 250; // Set to 500 for 2 frames per second
+	gameSpeed = setGameSpeed; // Set to 500 for 2 frames per second
 
 }
 
@@ -43,7 +43,7 @@ void Game::run(Game& gameInstance)
 	Input inputInstance;
 
 	// Run the Input object in another thread
-	std::thread inputThread(&Input::run, &inputInstance, std::ref(playerInstance));
+	std::thread inputThread(&Input::runGame, &inputInstance, std::ref(playerInstance));
 
 
 	Collision collisionClass; // Generate Collision class for collision funtions
@@ -60,14 +60,16 @@ void Game::run(Game& gameInstance)
 	{
 
 		// later move this to check flags function or class
-
+		 // _______________  I think this part of is alive and has won should be moved to some function laters __________________
 		// Check if snake has won, later to be moved in a seperate function
 		if (playerInstance.hasWon)
 		{
 
 			system("cls");// print game over
+			asciiConsoleSnake();
 			std::cout << "YOU WON!!!\n";// press r to restart press m to return to main menu
 			std::cout << "YOUR SCORE IS: " << playerInstance.score << std::endl;
+			std::cout << "Press enter to restart the application\n";
 			std::cin.get();
 			system("cls");
 			break;
@@ -78,8 +80,10 @@ void Game::run(Game& gameInstance)
 		{
 
 			system("cls");// print game over
+			asciiConsoleSnake();
 			std::cout << "GAME OVER!!!\n";// press r to restart press m to return to main menu
 			std::cout << "YOUR SCORE IS: " << playerInstance.score << std::endl;
+			std::cout << "Press enter to restart the application\n";
 			std::cin.get();
 			system("cls");
 			break;
@@ -139,8 +143,8 @@ void Game::run(Game& gameInstance)
 		// Put the Fruit to it's current coordinations
 		fruitInstance.putOnGrid(grid);
 
-		render(gameInstance, grid, playerInstance.score); // Rendering the grid on the screen
-		std::cout << "\nMax Score: " << maxScore << std::endl;
+		renderGame(gameInstance, grid, playerInstance.score); // Rendering the Game screen
+
 
 
 		Sleep(gameSpeed); // set Game Speed
@@ -152,16 +156,3 @@ void Game::run(Game& gameInstance)
 	inputThread.join();
 	return;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-// ========================= remove old coordinates of the body part so it doesnt stay and change it's direction ================

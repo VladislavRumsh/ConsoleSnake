@@ -1,4 +1,5 @@
 #include "Input.h"
+#include "Game.h"
 #include <windows.h> // For GetAsyncKeyState
 
 
@@ -8,10 +9,25 @@ Input::Input()
 
 }
 
-// Start of the Input instance
-void Input::run(Entity& playerInstance)
+// Start of the Game Input instance
+void Input::runGame(Entity& playerInstance)
 {
+	gameInput(playerInstance);
+	
+	return;
+}
 
+// Start of the Menu Input instance
+void Input::runMenu(int* selected)
+{
+	menuInput(selected);
+	
+	return;
+}
+
+
+void gameInput(Entity& playerInstance)
+{
 	while (playerInstance.isAlive && !playerInstance.hasWon) // Check whenever the Snake is alive and if you haven't won yet, otherwise finish the function and have the thread detached
 	{
 		if ((GetAsyncKeyState(VK_UP) & 0x8000) && playerInstance.oldDirection != 2)
@@ -24,17 +40,91 @@ void Input::run(Entity& playerInstance)
 		}
 		else if ((GetAsyncKeyState(VK_LEFT) & 0x8000) && playerInstance.oldDirection != 4)
 		{
-			playerInstance.direction  = 3;
+			playerInstance.direction = 3;
 		}
 		else if ((GetAsyncKeyState(VK_RIGHT) & 0x8000) && playerInstance.oldDirection != 3)
 		{
 			playerInstance.direction = 4;
-		}		
-		else if (GetAsyncKeyState(VK_END) & 0x8000) 
+		}
+		else if (GetAsyncKeyState(VK_END) & 0x8000)
 		{
-			
+
 		}
 	}
-	return;
 }
 
+void menuInput(int* selected)
+{
+	// Flags ensure a single click isn't registered mutliple times	
+	bool wasDownPressed = false;
+	bool wasUpPressed = false;
+
+	while (true)  // true for testing, this thread should be closed once the menu is closed, ig when u select something it  will set selected to 5 to close the thread and revert to 0 later for next opening
+	{
+		// Check if DOWN key is currently pressed
+		if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+		{
+			if (!wasDownPressed) // Check if this is a new key press
+			{
+				wasDownPressed = true; // Update the state
+
+				if (*selected == 2)
+				{
+					*selected = 0;
+				}
+				else
+				{
+					(*selected)++;
+				}
+			}
+		}
+		else
+		{
+			wasDownPressed = false; // Reset the state if key is not pressed
+		}
+
+		// Check if UP key is currently pressed
+		if (GetAsyncKeyState(VK_UP) & 0x8000)
+		{
+			if (!wasUpPressed) // Check if this is a new key press
+			{
+				wasUpPressed = true; // Update the state
+
+				if (*selected == 0)
+				{
+					*selected = 2;
+				}
+				else
+				{
+					(*selected)--;
+				}
+			}
+		}
+		else
+		{
+			wasUpPressed = false; // Reset the state if key is not pressed
+		}
+
+		if (GetAsyncKeyState(VK_RETURN) & 0x8000) // temporary use END to exit the menu and start the game, will change with updates
+		{
+			switch (*selected)
+			{
+			case 0: // Start
+				*selected = 0; // settubg selected to 5 will cause the selected menu item to initialize and start it's class
+				break;			
+			case 1: // Setting
+				*selected = 0;
+				break;			
+			case 2: // Help
+				*selected = 0;
+				break;
+			default:
+				break;
+			}
+		}
+
+		// Add a small delay to prevent CPU overuse
+		Sleep(50);
+	}
+
+}

@@ -40,6 +40,8 @@ void Entity::putOnGrid(char** grid)
 		case 4:
 			grid[entityY][entityX] = '>';
 			return;
+		default:
+			return;
 		}
 
 	}

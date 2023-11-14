@@ -1,25 +1,30 @@
 #include "game.h"
+#include "Menu.h"
 #include <windows.h>
+
 
 // Entry point
 int main()
 {
 
+
+
 	while (true)
 	{
 
-	
-	std::cout << "Welcome to the main menu of Console Snake!!! \n ---PRESS ENTER TO BEGIN THE GAME---";
-	std::cin.get();
+	// write "Console Snake" on top in ascii art
+	Menu menuInstance; // Starting the menu to configure the game still in developemtn
+	menuInstance.run();
+
+
 
 	// Create instance of the Game Object and run the game loop
-	Game gameInstance;
+	Game gameInstance(16, 30, 40); // Passing Rows and Collomns for grid size, should be set in the menu
 	gameInstance.run(gameInstance);
 
-	std::cout << "Press enter to restart the application\n";
-	std::cin.get();
-	system("cls");
 
 	}
+
 	return 0;
 }
+
