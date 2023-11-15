@@ -73,3 +73,16 @@ void asciiConsoleSnake()
 		"--------------------------------------------------------\n\n";
 	return;
 }
+
+
+// clear the console for the new frame and print the grid in the console
+void renderHelp()
+{
+	system("cls");
+	asciiConsoleSnake();
+	std::cout << "This will be the help page, nothing much but text with explanation. \nperhaps \nin \nmultiples \nlines";
+
+	return;
+}
+
+

@@ -2,6 +2,7 @@
 #include <thread> // For reading the Input in another thread and not disturb the game loop
 #include <windows.h>
 #include "Input.h"
+#include <iostream>
 
 // Initialize Game variables
 Game::Game(int setRows, int setCols, int setGameSpeed)
@@ -69,8 +70,11 @@ void Game::run(Game& gameInstance)
 			asciiConsoleSnake();
 			std::cout << "YOU WON!!!\n";// press r to restart press m to return to main menu
 			std::cout << "YOUR SCORE IS: " << playerInstance.score << std::endl;
-			std::cout << "Press enter to restart the application\n";
-			std::cin.get();
+			std::cout << "Press enter to return to the main menu\n";
+			while (playerInstance.direction != 0)
+			{
+
+			}
 			system("cls");
 			break;
 		}
@@ -83,8 +87,11 @@ void Game::run(Game& gameInstance)
 			asciiConsoleSnake();
 			std::cout << "GAME OVER!!!\n";// press r to restart press m to return to main menu
 			std::cout << "YOUR SCORE IS: " << playerInstance.score << std::endl;
-			std::cout << "Press enter to restart the application\n";
-			std::cin.get();
+			std::cout << "Press enter to return to the main menu\n";
+			while (playerInstance.direction != 0)
+			{
+
+			}
 			system("cls");
 			break;
 		}

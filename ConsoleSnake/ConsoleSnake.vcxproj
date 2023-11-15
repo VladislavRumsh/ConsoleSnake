@@ -131,22 +131,26 @@
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="ConsoleSnake.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Help.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Render.cpp" />
+    <ClCompile Include="Settings.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collision.h" />
     <ClInclude Include="ConsoleSnake.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameEntities.h" />
+    <ClInclude Include="Help.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Render.h" />
+    <ClInclude Include="Settings.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
