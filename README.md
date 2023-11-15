@@ -2,6 +2,11 @@
 
 **ConsoleSnake** is a console-based snake game developed in C++ using Object-Oriented Programming (OOP) principles. This project showcases a modular design, with key functionalities such as entity management (fruits and snake), rendering, and input handling divided into distinct classes and files for enhanced organization and maintainability.
 
+## Screenshots
+![Menu](https://github.com/VladislavRumsh/ConsoleSnake/assets/50557993/2b3282c2-843a-4ce5-8ce4-28122cf03018)
+![Settings](https://github.com/VladislavRumsh/ConsoleSnake/assets/50557993/d3526d2e-6617-4b11-ab4e-83d46406ab24)
+![Game](https://github.com/VladislavRumsh/ConsoleSnake/assets/50557993/56a2fc23-023f-4243-8c1a-41c45c3993c5)
+
 ## Key Features
 
 - **Game Grid Visualization**: Effectively displays the game within a console environment, offering a clear and functional grid layout.
