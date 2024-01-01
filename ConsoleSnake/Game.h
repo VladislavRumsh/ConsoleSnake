@@ -5,13 +5,13 @@
 #include "Render.h"
 #include <string>
 
-class Game 
+class Game
 {
 public:
 	Game(int setRows, int setCols, int setGameSpeed);
 	void run(Game& gameInstance);
 	int rows{}, cols{}, gameSpeed{}, maxScore{};
-	bool runGame{};
+	bool runGame{}, saveScore{};
 
 private:
 	

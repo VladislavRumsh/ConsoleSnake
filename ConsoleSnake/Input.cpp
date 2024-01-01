@@ -204,7 +204,7 @@ void settingsInput(int* selected, int* rows, int* cols, int*  speed)
 			wasUpPressed = false; // Reset the state if key is not pressed
 		}
 
-		// Check if UP key is currently pressed
+		// Check if LEFT key is currently pressed
 		if (GetAsyncKeyState(VK_LEFT) & 0x8000)
 		{
 			if (!wasLeftPressed) // Check if this is a new key press
@@ -214,13 +214,22 @@ void settingsInput(int* selected, int* rows, int* cols, int*  speed)
 				switch (*selected)
 				{
 				case 0:
-					(*rows) -= 2;
+					if (*rows > 4)
+					{
+						(*rows) -= 2;
+					}
 					break;
 				case 1:
-					(*cols) -= 2;
+					if (*cols > 4)
+					{
+						(*cols) -= 2;
+					}
 					break;
 				case 2:
-					*speed -= 5;
+					if (*speed >5)
+					{
+						*speed -= 5;
+					}
 					break;
 				default:
 					break;
@@ -232,6 +241,7 @@ void settingsInput(int* selected, int* rows, int* cols, int*  speed)
 			wasLeftPressed = false; // Reset the state if key is not pressed
 		}
 
+		// Check if RIGHT key is currently pressed
 		if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
 		{
 			if (!wasRightPressed) // Check if this is a new key press

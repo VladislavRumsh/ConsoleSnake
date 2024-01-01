@@ -47,7 +47,7 @@ void Settings::printSelection(int* rows, int* cols, int* speed)
 		std::cout << "   Height/Rows                                 -->" << *rows << std::endl;
 		std::cout << "   Width/Cols                                     " << *cols << std::endl;
 		std::cout << "   Speed ( 500 for 2 ticks per second )           " << *speed << std::endl;
-		std::cout << "   Exit settings" << *speed << std::endl;
+		std::cout << "   Exit settings" << std::endl;
 		break;
 	case 1:
 		std::cout << "   Height/Rows                                    " << *rows << std::endl;

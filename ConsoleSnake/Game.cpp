@@ -11,6 +11,7 @@ Game::Game(int setRows, int setCols, int setGameSpeed)
 	cols = setCols; // Set grid's width
 	runGame = true;
 	gameSpeed = setGameSpeed; // Set to 500 for 2 frames per second
+	saveScore = 1;
 
 }
 
@@ -65,18 +66,7 @@ void Game::run(Game& gameInstance)
 		// Check if snake has won, later to be moved in a seperate function
 		if (playerInstance.hasWon)
 		{
-
-			system("cls");// print game over
-			asciiConsoleSnake();
-			std::cout << "YOU WON!!!\n";// press r to restart press m to return to main menu
-			std::cout << "YOUR SCORE IS: " << playerInstance.score << std::endl;
-			std::cout << "Press enter to return to the main menu\n";
-			while (playerInstance.direction != 0)
-			{
-
-			}
-			system("cls");
-			break;
+			playerInstance.isAlive = false;
 		}
 
 		// Check if snake has died, later to be moved in a seperate function
@@ -85,9 +75,26 @@ void Game::run(Game& gameInstance)
 
 			system("cls");// print game over
 			asciiConsoleSnake();
-			std::cout << "GAME OVER!!!\n";// press r to restart press m to return to main menu
+			
+			if (playerInstance.hasWon)
+				std::cout << "YOU WON!!!\n";
+			else
+				std::cout << "GAME OVER!\n";
+			
+			// press r to restart press m to return to main menu
 			std::cout << "YOUR SCORE IS: " << playerInstance.score << std::endl;
-			std::cout << "Press enter to return to the main menu\n";
+			std::cout << "Would you like to save your score to the online scoreboard?\n";
+			if (saveScore)
+			{
+				std::cout << "->Yes\n";
+				std::cout << "  No\n";
+			}
+			else
+			{
+				std::cout << " Yes\n";
+				std::cout << "->No\n";
+			}
+
 			while (playerInstance.direction != 0)
 			{
 
