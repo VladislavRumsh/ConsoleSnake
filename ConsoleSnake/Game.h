@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include "GameEntities.h"
+#include "GameEnd.h"
 #include "Render.h"
 #include <string>
 

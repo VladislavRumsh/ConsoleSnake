@@ -1,6 +1,6 @@
 #include "HandleHTTP.h"
 
-void sendHTTPscore(const std::wstring& name, int score, const std::wstring& grid)
+void sendHTTPScore(const std::wstring& name, int score, const std::wstring& grid, int speed)
 {
 	HINTERNET hInternet = InternetOpen(L"ConsoleSnakeClient", INTERNET_OPEN_TYPE_DIRECT, NULL, NULL, 0);
 	if (hInternet == NULL)
@@ -10,7 +10,7 @@ void sendHTTPscore(const std::wstring& name, int score, const std::wstring& grid
 	}
 	// Construct the URL using a wostringstream
 	std::wostringstream urlStream;
-	urlStream << L"http://185.130.225.134:8123/ConsoleSnakeScoreboard?name=" << name << L"&score=" << score << L"&grid=" << grid;
+	urlStream << L"http://185.130.225.134:8123/ConsoleSnakeScoreboard?name=" << name << L"&score=" << score << L"&grid=" << grid << L"&speed=" << speed;
 
 	// Convert the constructed URL into a wstring
 	std::wstring url = urlStream.str();
@@ -23,7 +23,7 @@ void sendHTTPscore(const std::wstring& name, int score, const std::wstring& grid
 		return;
 	}
 
-	std::cout << "Success";
+	std::cout << "Succes";
 	InternetCloseHandle(hRequest);
 	InternetCloseHandle(hInternet);
 	return;

@@ -33,6 +33,13 @@ void Input::runSettings(int* selected, int* rows, int* cols, int* speed)
 	return;
 }
 
+// Start of the GameEnd intput instance
+void Input::runGameEnd(int* selected, bool* uploadScore)
+{
+	gameEndInput(selected, uploadScore);
+
+	return;
+}
 
 void gameInput(Entity& playerInstance)
 {
@@ -281,4 +288,73 @@ void settingsInput(int* selected, int* rows, int* cols, int*  speed)
 		}
 	}
 	return;
+}
+
+void gameEndInput(int* selected, bool* uploadScore)
+{
+
+	bool wasDownPressed = false;
+	bool wasUpPressed = false;
+
+
+	while (*selected != 5)
+	{
+
+		// Check if DOWN key is currently pressed
+		if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+		{
+			if (!wasDownPressed) // Check if this is a new key press
+			{
+				wasDownPressed = true; // Update the state
+
+				if (*selected == 0)
+				{
+					*selected = 1;
+				}
+				else if (*selected == 1)
+				{
+					*selected = 0;
+				}
+			}
+		}
+		else
+		{
+			wasDownPressed = false; // Reset the state if key is not pressed
+		}
+
+		// Check if UP key is currently pressed
+		if (GetAsyncKeyState(VK_UP) & 0x8000)
+		{
+			if (!wasUpPressed) // Check if this is a new key press
+			{
+				wasUpPressed = true; // Update the state
+
+				if (*selected == 0)
+				{
+					*selected = 1;
+				}
+				else if (*selected == 1)
+				{
+					*selected = 0;
+				}
+			}
+		}
+		else
+		{
+			wasUpPressed = false; // Reset the state if key is not pressed
+		}
+
+		if (GetAsyncKeyState(VK_RETURN) & 0x8000)
+		{
+				while ((GetAsyncKeyState(VK_RETURN) & 0x8000)) // wait until release of Enter to metigate bugs
+				{
+
+				}
+				if (*selected == 0)
+				{
+					*uploadScore = true;
+				}
+				*selected= 5; // In the settings.cpp there is a check that uses sleceted = 5 to close the windows
+		}
+	}
 }

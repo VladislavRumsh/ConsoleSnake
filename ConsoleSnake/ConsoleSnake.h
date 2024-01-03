@@ -7,5 +7,6 @@
 #include "Render.h"
 #include "Random.h"
 #include "Collision.h"
+#include "GameEnd.h"
 
 #endif

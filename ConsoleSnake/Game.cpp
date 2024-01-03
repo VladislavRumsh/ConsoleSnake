@@ -1,8 +1,9 @@
 #include "ConsoleSnake.h"
+#include "Input.h"
 #include <thread> // For reading the Input in another thread and not disturb the game loop
 #include <windows.h>
-#include "Input.h"
 #include <iostream>
+
 
 // Initialize Game variables
 Game::Game(int setRows, int setCols, int setGameSpeed)
@@ -72,33 +73,8 @@ void Game::run(Game& gameInstance)
 		// Check if snake has died, later to be moved in a seperate function
 		if (!playerInstance.isAlive)
 		{
-
-			system("cls");// print game over
-			asciiConsoleSnake();
-			
-			if (playerInstance.hasWon)
-				std::cout << "YOU WON!!!\n";
-			else
-				std::cout << "GAME OVER!\n";
-			
-			// press r to restart press m to return to main menu
-			std::cout << "YOUR SCORE IS: " << playerInstance.score << std::endl;
-			std::cout << "Would you like to save your score to the online scoreboard?\n";
-			if (saveScore)
-			{
-				std::cout << "->Yes\n";
-				std::cout << "  No\n";
-			}
-			else
-			{
-				std::cout << " Yes\n";
-				std::cout << "->No\n";
-			}
-
-			while (playerInstance.direction != 0)
-			{
-
-			}
+			GameEnd gameEndInstance;  // Declare gameEndInstance
+		    gameEndInstance.run(rows, cols, gameSpeed, playerInstance.score, playerInstance.hasWon);
 			system("cls");
 			break;
 		}

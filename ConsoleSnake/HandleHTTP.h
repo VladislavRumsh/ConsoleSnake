@@ -8,4 +8,6 @@
 #include <sstream>
 
 
+void sendHTTPScore(const std::wstring& name, int score, const std::wstring& grid, int speed);
+
 #endif

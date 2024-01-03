@@ -1,8 +1,6 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
-#include "Render.h"
-
 class Settings
 {
 public:

@@ -1,5 +1,4 @@
 #include "Settings.h"
-#include "Render.h"
 #include "Input.h"
 #include <windows.h> // remove if close menu is removed from here
 #include <thread>
