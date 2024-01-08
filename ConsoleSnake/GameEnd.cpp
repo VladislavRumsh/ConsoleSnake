@@ -1,7 +1,10 @@
 #include "GameEnd.h"
 #include "Input.h"
 #include <windows.h> // remove if close menu is removed from here
+#undef min //undefining for std::streamsize :: max
+#undef max
 #include <thread>
+#include <limits>
 
 GameEnd::GameEnd()
 {
@@ -35,14 +38,30 @@ void GameEnd::run(int rows, int cols, int speed, int score, bool haveWon)
 
 		//sendHTTPScore(L"Test Name", playerInstance.score, std::to_wstring(rows) + L"x" + std::to_wstring(gameInstance.cols), gameInstance.gameSpeed
 		GameEnd::printSelection();
-
 	Sleep(50);
 	}
 
 	if (uploadScore == true)
 	{
-		sendHTTPScore(L"Name", score, L"grid size in text", speed);
+
+		// Displaying a screen to take the name from the user in case he wanted to upload his score		    
+		// Check if the input is empty and assign "Guest" if it is
+		std::wstring tempName, gridSize;
+		std::wstringstream gridSizeStream; // since i can't use the << operator to write rows and cols into wstring I first do it with wstringstream and then write that into wstring gridSize
+    if (tempName.empty()) {
+		tempName = L"Guest";
+    }
+	gridSizeStream << rows << L" x " << cols;
+
+	gridSize = gridSizeStream.str();
+	
+	sendHTTPScore(tempName, score, gridSize, speed);
+
+
 	}
+
+	system("cls");
+	
 
 	// Detach input thread
 	inputThread.join();
@@ -63,7 +82,6 @@ void GameEnd::printSelection()
 		std::cout << "-->No\n";
 		break;
 	default:
-		std::cout << "Unexpected value: " << selected << "\n"; // for debugging purposes, needs to be deleted later
 		break;
 	}
 }

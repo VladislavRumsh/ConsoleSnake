@@ -23,7 +23,6 @@ void sendHTTPScore(const std::wstring& name, int score, const std::wstring& grid
 		return;
 	}
 
-	std::cout << "Succes";
 	InternetCloseHandle(hRequest);
 	InternetCloseHandle(hInternet);
 	return;
