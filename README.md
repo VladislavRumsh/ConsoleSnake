@@ -1,6 +1,6 @@
 # ConsoleSnake
 
-**ConsoleSnake** is a console-based snake game developed in C++ using Object-Oriented Programming (OOP) principles. This project showcases a modular design, with key functionalities such as entity management (fruits and snake), rendering, and input handling divided into distinct classes and files for enhanced organization and maintainability.
+**ConsoleSnake** is a sophisticated console-based snake game developed in C++ with a client-server architecture. Employing Object-Oriented Programming (OOP) principles, the game has expanded to include a Flask server for score management and SQLite for database functionality.
 
 ## Screenshots
 ![Menu](https://github.com/VladislavRumsh/ConsoleSnake/assets/50557993/2b3282c2-843a-4ce5-8ce4-28122cf03018)
@@ -9,37 +9,47 @@
 
 ## Key Features
 
-- **Game Grid Visualization**: Effectively displays the game within a console environment, offering a clear and functional grid layout.
-- **Real-Time Snake Movement and Control**: Provides responsive and intuitive control of the snake's movement for smooth gameplay.
-- **Advanced Collision Detection**: Efficiently handles collisions with walls, fruits, and the snake's own tail to enrich the gameplay dynamics.
-- **Score System**: Incorporates a scoring mechanism to track and display player progress.
-- **Multi-threaded Input Handling**: Ensures responsive gameplay by managing user input in a separate thread.
-- **Customizable Game Settings**: A fully implemented main menu and settings allow players to adjust game parameters such as grid size and snake speed, enhancing player engagement.
+- **Client-Server Model**: Implements a Flask server to handle score submissions and management.
+- **SQLite Database Integration**: Efficient storage and retrieval of player scores and game data.
+- **Multithreading for Responsiveness**: Ensures smooth gameplay and server communication.
+- **Customizable Settings**: Allows players to modify game parameters and server configurations.
+- **OOP and Modular Design**: Facilitates maintainability and clarity in code structure.
 
 ## Recent Updates
 
-- **Implemented Main Menu and Settings**: A functional main menu and settings feature has been added, enabling players to customize various aspects of the game.
-- **User Interface Enhancements**: Continuous improvements to the user interface, including adjustments to the help window and other textual elements.
+- **Integration of Flask and SQLite**: Added a Flask server for score management and SQLite for database operations.
+- **Developed Using Visual Studio**: The project was created and maintained using Visual Studio, enhancing its compatibility with Windows systems.
 
 ## Future Plans
 
-- The current focus is on refining the existing codebase, including cleaning, sorting, and updating comments for enhanced readability and maintainability. No additional features are planned until this phase is complete.
+- Ongoing improvements in code and UI.
+- Potential enhancements to server features and game mechanics.
 
 ## System Requirements
 
-- Requires a C++ compiler (C++17 or higher recommended).
-- Compatible with Windows platforms, utilizing Windows-specific system calls.
+- A Windows operating system.
+- C++ compiler (Visual Studio is the primary development environment).
+- Python setup for the Flask server.
 
 ## Compilation and Usage
 
-1. Clone or download the project repository on a Windows machine.
-2. Compile the source files using a C++ compiler.
-3. Execute the compiled program to start the game.
+### Setting Up the Game Client
+
+1. **Clone the Repository**: Obtain the project from GitHub.
+2. **Visual Studio Configuration**: Open the project in Visual Studio. Users on other systems or IDEs may need to configure project settings accordingly.
+3. **Resolve Dependencies**: Ensure all dependencies, like the WinINet library, are properly linked.
+4. **Build the Project**: Use Visual Studio for building the game client.
+
+### Setting Up the Flask Server
+
+1. **Python Environment**: Set up a Python environment suitable for running a Flask server.
+2. **Install Flask**: Ensure Flask is installed in the Python environment.
+3. **Run the Server**: Start the Flask server which will interact with the game client for score handling.
 
 ## Author
 
-- **Vladislav Rumsh** - Complete development and ongoing updates - [VladislavRumsh](https://github.com/VladislavRumsh)
+- **Vladislav Rumsh** - Complete development and ongoing updates.
 
 ## License
 
-This project is open-sourced under the MIT License. See the [LICENSE](LICENSE) file for more details.
+This project is open-sourced under the MIT License. 
